@@ -17,7 +17,7 @@ const drawLine = (a1, a2, b1, b2) => {
   var geometry = new THREE.BufferGeometry().setFromPoints( points )
   var material = new THREE.LineBasicMaterial({
     color : 0xffffff,
-    // linewidth: 50 // doesn't do anything?
+    linewidth: 50 // doesn't do anything?
   })
   var curveObject = new THREE.Line( geometry, material )
 
