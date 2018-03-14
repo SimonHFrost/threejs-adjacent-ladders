@@ -3,13 +3,12 @@ const THREE = require('three')
 const initialize = require('./initializer.js').initialize
 const createAmbientLight = require('./object-creator.js').createAmbientLight
 const createDirectionalLight = require('./object-creator.js').createDirectionalLight
+const FastSimplexNoise = require('fast-simplex-noise')
 
 const output = initialize()
 const scene = output.scene
 
 const drawLine = (a1, a2, b1, b2) => {
-  console.log(a1, a2, b1, b2)
-
   var curve = new THREE.LineCurve(
     new THREE.Vector2(a1, a2),
     new THREE.Vector2(b1, b2)
@@ -40,9 +39,17 @@ let totals = []
 totals.length = NUM_COLUMNS
 totals.fill(-50)
 
+let noiseGens = []
+noiseGens.length = NUM_COLUMNS
+noiseGens.fill(new FastSimplexNoise.default({ frequency: 0.1, max: 5, min: 0, octaves: 8 }))
+
 for (let i = 0; i < NUM_ROWS; i++) {
   for (let j = 0; j < NUM_COLUMNS; j++) {
-    totals[j] += 1 + Math.random() * 10
+
+    const noiseGen = noiseGens[j]
+
+    // use perlin noise instead of full random so more organic curves are created
+    totals[j] += noiseGen.scaled([j, 0])
 
     // we're about to draw from the current point to the previous one,
     // this won't work for the first line :)
