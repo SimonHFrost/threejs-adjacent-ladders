@@ -6,7 +6,7 @@ function createRenderer () {
   const renderer = new THREE.WebGLRenderer({
     antialias: true
   })
-  renderer.setClearColor(new THREE.Color('lightblue'), 1)
+  renderer.setClearColor(new THREE.Color('black'), 1)
   renderer.setSize(window.innerWidth, window.innerHeight)
 
   const containerComponent = document.getElementById('webgl')
@@ -21,8 +21,8 @@ function createRenderer () {
 
 function createCamera (renderer) {
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000)
-  camera.position.z = 5
-  camera.position.y = 3
+  camera.position.z = 50
+  camera.position.y = 30
 
   camera.lookAt(new THREE.Vector3(0, 0, 0))
 
