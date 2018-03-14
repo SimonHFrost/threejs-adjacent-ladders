@@ -41,14 +41,13 @@ totals.fill(-50)
 
 let noiseGens = []
 noiseGens.length = NUM_COLUMNS
-noiseGens.fill(new FastSimplexNoise.default({ frequency: 0.1, max: 5, min: 0, octaves: 8 }))
+noiseGens.fill(new FastSimplexNoise.default({ frequency: 1, max: 10, min: 0, octaves: 8 }))
 
 for (let i = 0; i < NUM_ROWS; i++) {
   for (let j = 0; j < NUM_COLUMNS; j++) {
 
-    const noiseGen = noiseGens[j]
-
     // use perlin noise instead of full random so more organic curves are created
+    const noiseGen = noiseGens[j]
     totals[j] += noiseGen.scaled([j, 0])
 
     // we're about to draw from the current point to the previous one,
