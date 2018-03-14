@@ -44,6 +44,8 @@ for (let i = 0; i < NUM_ROWS; i++) {
   for (let j = 0; j < NUM_COLUMNS; j++) {
     totals[j] += 1 + Math.random() * 10
 
+    // we're about to draw from the current point to the previous one,
+    // this won't work for the first line :)
     if (j === 0) {
       continue;
     }
